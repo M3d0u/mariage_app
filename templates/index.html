@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Médéric & Camille</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💒</text></svg>">
+
+    <!-- Styles & Fonts -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        :root {
+            --main-color: #55572b;
+            --text-color: #3a3b1d;
+            --background-color: #faf8f2;
+            --accent-color: #d4c5a3;
+            --light-grey: #e8e4d9;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--main-color);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 0;
+            background-color: var(--light-grey);
+            border-radius: 10px;
+            padding-bottom: 30px;
+        }
+
+        .hero img {
+            max-width: 70%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-custom {
+            background-color: var(--main-color);
+            color: white;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #444621;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 20px;
+        }
+
+        .section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .program-img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Médéric & Camille</h1>
+            <h3>Le samedi 6 septembre 2025</h3>
+            <img src="{{ url_for('static', filename='image_camedeon.jpeg') }}" alt="Médéric & Camille">
+            <p>N'oubliez pas de nous répondre avant le <strong>5 juillet 2025</strong> !</p>
+            <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#rsvpModal">✉️ Répondre à l'invitation</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Wedding Registry -->
+        <div class="section">
+            <h2>Notre liste de mariage</h2>
+            <p>Si vous le souhaitez, vous pouvez nous accompagner dans ce début de vie à deux !</p>
+            <a href="https://www.millemercismariage.com/camedeon/liste.html" class="btn btn-custom">🎁 Voir notre liste</a>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Locations -->
+        <div class="section">
+            <h2>Les lieux</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Cérémonie religieuse</h4>
+                    <p>La célébration religieuse aura lieu en l'église de Saint-Gervais et Saint-Protais, à Saint-Gervais (95420) :</p>
+                    <div class="map-container">
+                        <iframe width="100%" height="250" frameborder="0" style="border:0;" loading="lazy"
+                            src="https://www.google.com/maps/embed/v1/place?key={{ API_GOOGLE_MAPS }}&q=Rue+de+l'Église,+95420+Saint-Gervais">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Réception</h4>
+                    <p>La réception se tiendra au Clos Magnitos, à 4 minutes (en voiture) de l'église :</p>
+                </br>
+                    <div class="map-container">
+                        <iframe width="100%" height="250" frameborder="0" style="border:0;" loading="lazy"
+                            src="https://www.google.com/maps/embed/v1/place?key={{ API_GOOGLE_MAPS }}&q=Hameau+de+Magnitot,+1+rue+du+Prieuré,+95420+Saint-Gervais">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Program -->
+        <div class="section">
+            <h2>Le programme</h2>
+            <div class="row text-center d-flex justify-content-center">
+                <div class="col-md-2 d-flex flex-column align-items-center">
+                    <img src="{{ url_for('static', filename='eglise.svg') }}" class="program-img">
+                    <p>16h - Cérémonie</p>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-center">
+                    <img src="{{ url_for('static', filename='cocktail.svg') }}" class="program-img">
+                    <p>18h - Cocktail</p>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-center">
+                    <img src="{{ url_for('static', filename='diner.svg') }}" class="program-img">
+                    <p>20h30 - Dîner</p>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-center">
+                    <img src="{{ url_for('static', filename='soiree.svg') }}" class="program-img">
+                    <p>23h - Soirée</p>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-center">
+                    <img src="{{ url_for('static', filename='brunch.svg') }}" class="program-img">
+                    <p>11h - Brunch</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Accommodation Section -->
+        <div class="section">
+            <h2>Où dormir ?</h2>
+            <p>Nous vous recommandons quelques hôtels et logements pour votre séjour près du lieu de réception.</p>
+        
+            <div class="row justify-content-center">
+                <!-- Example Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ url_for('static', filename='hotel_example.jpg') }}" class="card-img-top" alt="Exemple Hôtel">
+                        <div class="card-body">
+                            <h5 class="card-title">Hôtel de la Rivière</h5>
+                            <p class="card-text">Un charmant hôtel à proximité du lieu de réception, offrant un cadre paisible et raffiné.</p>
+                            <a href="https://www.examplehotel.com" target="_blank" class="btn btn-custom">🔗 Voir l'hôtel</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Example Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ url_for('static', filename='hotel_example2.jpg') }}" class="card-img-top" alt="Autre Hôtel">
+                        <div class="card-body">
+                            <h5 class="card-title">Maison d'hôtes du Parc</h5>
+                            <p class="card-text">Une maison d'hôtes élégante avec vue sur la nature, idéale pour un séjour relaxant.</p>
+                            <a href="https://www.exampleguesthouse.com" target="_blank" class="btn btn-custom">🔗 Voir la maison d'hôtes</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Example Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <img src="{{ url_for('static', filename='hotel_example2.jpg') }}" class="card-img-top" alt="Autre Hôtel">
+                        <div class="card-body">
+                            <h5 class="card-title">Maison d'hôtes du Parc</h5>
+                            <p class="card-text">Une maison d'hôtes élégante avec vue sur la nature, idéale pour un séjour relaxant.</p>
+                            <a href="https://www.exampleguesthouse.com" target="_blank" class="btn btn-custom">🔗 Voir la maison d'hôtes</a>
+                        </div>
+                    </div>
+                </div>
+
+             <!-- Example Card 1 -->
+             <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ url_for('static', filename='hotel_example.jpg') }}" class="card-img-top" alt="Exemple Hôtel">
+                    <div class="card-body">
+                        <h5 class="card-title">Hôtel de la Rivière</h5>
+                        <p class="card-text">Un charmant hôtel à proximité du lieu de réception, offrant un cadre paisible et raffiné.</p>
+                        <a href="https://www.examplehotel.com" target="_blank" class="btn btn-custom">🔗 Voir l'hôtel</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Example Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ url_for('static', filename='hotel_example2.jpg') }}" class="card-img-top" alt="Autre Hôtel">
+                    <div class="card-body">
+                        <h5 class="card-title">Maison d'hôtes du Parc</h5>
+                        <p class="card-text">Une maison d'hôtes élégante avec vue sur la nature, idéale pour un séjour relaxant.</p>
+                        <a href="https://www.exampleguesthouse.com" target="_blank" class="btn btn-custom">🔗 Voir la maison d'hôtes</a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Example Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ url_for('static', filename='hotel_example2.jpg') }}" class="card-img-top" alt="Autre Hôtel">
+                    <div class="card-body">
+                        <h5 class="card-title">Maison d'hôtes du Parc</h5>
+                        <p class="card-text">Une maison d'hôtes élégante avec vue sur la nature, idéale pour un séjour relaxant.</p>
+                        <a href="https://www.exampleguesthouse.com" target="_blank" class="btn btn-custom">🔗 Voir la maison d'hôtes</a>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        
+
+        <div class="footer">
+            <p>&copy; 2025 Médéric & Camille</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
