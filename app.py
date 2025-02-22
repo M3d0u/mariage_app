@@ -3,7 +3,6 @@ import requests
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a secure key
 
 # Load Webhook URL from environment variables
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
@@ -18,11 +17,8 @@ def submit_rsvp():
     name = request.form.get("name")
     email = request.form.get("email")
     statut_participation = request.form.get("statut_participation")  # Ensure it's not empty
+    brunch = request.form.get("statut_brunch")
     message = request.form.get("message")
-
-    # Debugging: Print the received form data
-    print("Received RSVP Data:")
-    print(f"Name: {name}, Email: {email}, Status: {statut_participation}, Message: {message}")
 
     if not name or not email or not statut_participation or not message:
         return jsonify({"error": "All fields are required"}), 400
@@ -30,9 +26,14 @@ def submit_rsvp():
     data = {
         "email": email,
         "name": name,
-        "particpe": statut_participation,
+        "participe": statut_participation,
+        "brunch": brunch,
         "message": message
     }
+
+    # Debugging: Print the received form data
+    print("RSVP Data:")
+    print(f"{data}")
 
     response = requests.post(WEBHOOK_URL, json=data)
 
