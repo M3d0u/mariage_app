@@ -133,7 +133,7 @@
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Veuillez choisir une option</label>
+                                <label class="form-label">Veuillez choisir une option :</label>
                                 <div>
                                     <input type="radio" id="participate" name="statut_participation" value="Je participe" checked>
                                     <label for="participate">Je participe</label>
@@ -142,7 +142,16 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="message" class="form-label">Votre message</label>
+                                <label class="form-label">Souhaitez-vous venir au brunch le lendemain ?</label>
+                                <div>
+                                    <input type="radio" id="brunch" name="statut_brunch" value="Oui" checked>
+                                    <label for="brunch">Oui</label>
+                                    <input type="radio" id="not_brunch" name="statut_brunch" value="Non">
+                                    <label for="not_brunch">Non</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Un message en plus ?</label>
                                 <textarea class="form-control" id="message" name="message" rows="3">Bien sûr que je viens !</textarea>
                             </div>
                             <button type="submit" class="btn btn-success">Confirmer</button>
