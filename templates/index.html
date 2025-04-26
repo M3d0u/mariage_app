@@ -133,31 +133,47 @@
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">À quoi êtes-vous invités ?</label>
+                                <div>
+                                    <input type="radio" id="cocktail" name="type_invitation" value="cocktail" required>
+                                    <label for="cocktail">Au cocktail uniquement</label><br>
+                                    <input type="radio" id="cocktail_diner" name="type_invitation" value="cocktail_diner">
+                                    <label for="cocktail_diner">Au cocktail et au dîner placé</label>
+                                </div>
+                            </div>
+
+                            <!-- Partie caché -->
+                            <div id="statut_participation_block" class="mb-3" style="display:none;">
                                 <label class="form-label">Veuillez choisir une option :</label>
                                 <div>
-                                    <input type="radio" id="participate" name="statut_participation" value="Je participe" checked>
+                                    <input type="radio" id="participate" name="statut_participation" value="Je participe">
                                     <label for="participate">Je participe</label>
                                     <input type="radio" id="not_participate" name="statut_participation" value="Je ne participe pas">
                                     <label for="not_participate">Je ne participe pas</label>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            
+                            <div id="brunch_block" class="mb-3" style="display:none;">
                                 <label class="form-label">Souhaitez-vous venir au brunch le lendemain ?</label>
                                 <div>
-                                    <input type="radio" id="brunch" name="statut_brunch" value="Oui" checked>
+                                    <input type="radio" id="brunch" name="statut_brunch" value="Oui">
                                     <label for="brunch">Oui</label>
                                     <input type="radio" id="not_brunch" name="statut_brunch" value="Non">
                                     <label for="not_brunch">Non</label>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            
+                            <div id="musique_block" class="mb-3" style="display:none;">
                                 <label for="musique" class="form-label">Un titre de musique qui vous fait danser jusqu'au bout de la nuit ?</label>
                                 <textarea class="form-control" id="musique" name="musique" rows="1"></textarea>
                             </div>
-                            <div class="mb-3">
+                            
+                            <div id="message_block" class="mb-3" style="display:none;">
                                 <label for="message" class="form-label">Un message en plus ?</label>
                                 <textarea class="form-control" id="message" name="message" rows="3">Bien sûr que je viens !</textarea>
                             </div>
+                            <!-- Partie caché -->
+                            
                             <button type="submit" class="btn btn-success" id="submitRsvpButton">
                                 Confirmer
                               </button>
@@ -257,7 +273,7 @@
             <a href="{{ url_for('static', filename='logements.pdf') }}" target="_blank" class="btn btn-custom">🔗 Voir la liste des gîtes et hôtels</a>
 
             <div class="info-box">
-                <p>🚌 Parce qu'avec (un peu) d'alcool, la fête est plus folle ! Une voiture sera disponible, de 1h à 5h, pour vous conduire jusque dans votre lit (4 places, trajet jusqu'à 15km du lieu de réception).</p>
+                <p>🚌 Parce qu'avec (un peu) d'alcool, la fête est plus folle ! Une navette sera disponible, de minuit à 6h, pour vous conduire jusque dans votre lit (navette 8 places, trajet jusqu'à 15km du lieu de réception).</p>
             </div>
         </div>
         
@@ -312,4 +328,33 @@
 
 
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cocktailRadio = document.getElementById('cocktail');
+        const cocktailDinerRadio = document.getElementById('cocktail_diner');
+
+        function updateForm() {
+            const isCocktail = cocktailRadio.checked;
+            const isCocktailDiner = cocktailDinerRadio.checked;
+
+            if (isCocktail || isCocktailDiner) {
+                document.getElementById('statut_participation_block').style.display = 'block';
+                document.getElementById('message_block').style.display = 'block';
+            }
+
+            if (isCocktailDiner) {
+                document.getElementById('brunch_block').style.display = 'block';
+                document.getElementById('musique_block').style.display = 'block';
+            } else {
+                document.getElementById('brunch_block').style.display = 'none';
+                document.getElementById('musique_block').style.display = 'none';
+            }
+        }
+
+        cocktailRadio.addEventListener('change', updateForm);
+        cocktailDinerRadio.addEventListener('change', updateForm);
+    });
+</script>
+
 </html>
