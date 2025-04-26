@@ -16,12 +16,12 @@ def home():
 def submit_rsvp():
     name = request.form.get("name")
     email = request.form.get("email")
-    statut_participation = request.form.get("statut_participation")  # Ensure it's not empty
-    brunch = request.form.get("statut_brunch")
-    musique = request.form.get("musique")
+    statut_participation = request.form.get("statut_participation")  
+    brunch = request.form.get("statut_brunch") or 'pas invité'
+    musique = request.form.get("musique") or 'pas invité'
     message = request.form.get("message")
 
-    if not name or not email or not statut_participation or not brunch:
+    if not name or not email or not statut_participation:
         return jsonify({"error": "All fields are required"}), 400
 
     data = {
